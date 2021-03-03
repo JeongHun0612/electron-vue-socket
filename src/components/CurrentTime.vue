@@ -10,7 +10,7 @@ export default {
   created() {
     this.date = this.$moment().format("M월 d일");
     setInterval(() => {
-      this.time = this.$moment().format("H:mm:ss");
+      this.time = this.$moment().format("HH:mm:ss");
     }, 1000);
   },
   data() {

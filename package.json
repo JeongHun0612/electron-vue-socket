@@ -12,6 +12,7 @@
         "postuninstall": "electron-builder install-app-deps"
     },
     "main": "background.js",
+    "lint": "eslint --ext .js,.vue src",
     "dependencies": {
         "core-js": "^2.6.5",
         "vue": "^2.6.10",
@@ -26,6 +27,10 @@
         "@vue/cli-service": "^3.12.0",
         "electron": "^10.0.0",
         "electron-devtools-installer": "^3.1.0",
+        "eslint": "^7.21.0",
+        "eslint-config-prettier": "^8.1.0",
+        "eslint-plugin-prettier": "^3.3.1",
+        "eslint-plugin-vue": "^7.7.0",
         "sass": "^1.32.0",
         "sass-loader": "^10.0.0",
         "vue-cli-plugin-electron-builder": "^2.0.0-rc.6",

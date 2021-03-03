@@ -12,7 +12,7 @@
     class="elevation-1"
   >
     <template v-slot:item.sport="{ item }">
-      <v-icon>mdi-tennis</v-icon>
+      <v-icon color="orange"> {{ getSportIcon(item.sport) }} </v-icon>
     </template>
   </v-data-table>
 </template>
@@ -21,8 +21,8 @@
 export default {
   created() {
     this.$socket.emit("getSiteInfo", (req) => {
-      console.log("test")
-    })
+      console.log("test");
+    });
 
     this.$socket.on("getSiteInfoResponse", (res) => {
       this.items = res.data;
@@ -33,8 +33,15 @@ export default {
     rowClick(item) {
       alert(item.id);
     },
-    getSportImage(sport) {
-      if ((sport = "축구")) {
+    getSportIcon(sport) {
+      if (sport == "축구") {
+        return "mdi-soccer";
+      } else if (sport == "농구") {
+        return "mdi-basketball";
+      } else if (sport == "야구") {
+        return "mdi-baseball";
+      } else if (sport == "하키") {
+        return "mdi-hockey-puck";
       }
     },
   },
@@ -114,7 +121,16 @@ export default {
 </script>
 
 <style>
+#league-list-table {
+  margin-top: 28px;
+}
+
 #league-list-table table thead tr th {
   background: gray;
+  height: 20px;
+}
+
+#league-list-table table tr td {
+  height: 10px;
 }
 </style>
