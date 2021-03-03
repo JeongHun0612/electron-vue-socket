@@ -7,25 +7,13 @@
       <v-icon>mdi-triangle</v-icon>
     </v-system-bar>
 
-    <v-app-bar app clipped-right flat height="72">
-      <v-spacer></v-spacer>
-
-      <v-responsive max-width="156">
-        <v-text-field
-          dense
-          flat
-          hide-details
-          rounded
-          solo-inverted
-        ></v-text-field>
-      </v-responsive>
-    </v-app-bar>
+    <v-app-bar app clipped-right flat height="50"> </v-app-bar>
 
     <div class="site-list-nav">
       <SiteListNav />
     </div>
 
-    <v-navigation-drawer app clipped permanent right>
+    <!-- <v-navigation-drawer app clipped permanent right>
       <v-list>
         <v-list-item v-for="n in 5" :key="n" link>
           <v-list-item-content>
@@ -33,28 +21,29 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-    </v-navigation-drawer>
+    </v-navigation-drawer> -->
 
     <v-main class="pa-0">
       <LeagueTableList />
+      <v-container mt-1 fluid>
+        <v-layout wrap row>
+          <BettingCalculator
+            v-for="calc in calculator"
+            :key="calc.name"
+            :name="calc.name"
+          />
+        </v-layout>
+      </v-container>
     </v-main>
 
-    <v-footer app color="transparent" height="73" inset>
-      <v-text-field
-        background-color="grey lighten-1"
-        dense
-        flat
-        hide-details
-        rounded
-        solo
-      ></v-text-field>
-    </v-footer>
+    <v-footer app color="transparent" height="10" inset> </v-footer>
   </v-app>
 </template>
 
 <script>
 import LeagueTableList from "../components/LeagueTableList";
 import SiteListNav from "../components/SiteListNav";
+import BettingCalculator from "../components/BettingCalculator";
 
 export default {
   name: "Home",
@@ -62,12 +51,21 @@ export default {
   components: {
     LeagueTableList,
     SiteListNav,
-  },
-  created() {
-    this.$socket.emit("getConnection ", (res) => {});
+    BettingCalculator,
   },
   data() {
-    return {};
+    return {
+      calculator: [
+        { name: "해외 승무패", overWin: "2.14", overDraw: "P3.6", overLose: "P3.43" },
+        { name: "해외 0.0" },
+        { name: "해외 0.1" },
+        { name: "해외 0.2" },
+        { name: "해외 0.3" },
+        { name: "해외 0.4" },
+        { name: "해외 0.5" },
+        { name: "해외 0.6" },
+      ],
+    };
   },
 };
 </script>

@@ -12,7 +12,6 @@
     class="elevation-1"
   >
     <template v-slot:item.sport="{ item }">
-      <!-- <v-img src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"></v-img> -->
       <v-icon>mdi-tennis</v-icon>
     </template>
   </v-data-table>
@@ -21,9 +20,10 @@
 <script>
 export default {
   created() {
-    // this.$socket.emit("getSiteInfo", (req) => {
-    //   req
-    // })
+    this.$socket.emit("getSiteInfo", (req) => {
+      console.log("test")
+    })
+
     this.$socket.on("getSiteInfoResponse", (res) => {
       this.items = res.data;
       console.log(res.data[0].id);
