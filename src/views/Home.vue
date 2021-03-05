@@ -47,9 +47,9 @@
 </template>
 
 <script>
-import LeagueTableList from "../components/LeagueTableList";
-import SiteListNav from "../components/SiteListNav";
-import BettingCalculator from "../components/BettingCalculator";
+import LeagueTableList from "../components/main/LeagueTableList";
+import SiteListNav from "../components/main/SiteListNav";
+import BettingCalculator from "../components/main/BettingCalculator";
 
 export default {
   name: "Home",

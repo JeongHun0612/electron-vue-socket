@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import CurrentTime from "./CurrentTime";
+import CurrentTime from "../CurrentTime";
 
 export default {
   components: { CurrentTime },
@@ -32,7 +32,7 @@ export default {
       //   "사이트 추가",
       //   "width=1500"
       // );
-      this.$router.push({ name: "SiteAdd" });
+      this.$router.push({ name: "setHome" });
     },
   },
 };

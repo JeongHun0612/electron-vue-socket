@@ -4,8 +4,10 @@
     :headers="headers"
     :items="items"
     height="500px"
+    dense
     fixed-header
-    disable-sort
+    :loading="loadTable"
+    loading-text="Loading... Please wait"
     disable-pagination
     hide-default-footer
     @click:row="rowClick"
@@ -24,10 +26,96 @@ export default {
       console.log("test");
     });
 
-    this.$socket.on("getSiteInfoResponse", (res) => {
-      this.items = res.data;
-      console.log(res.data[0].id);
+    this.$socket.on("getSiteInfoResponse", (res, err) => {
+      this.loadTable = false;
+      this.items = res.data.sort((a, b) => {
+        return b.id - a.id;
+      });
     });
+  },
+  data() {
+    return {
+      loadTable: true,
+      items: [],
+      headers: [
+        {
+          text: "종목",
+          align: "center",
+          divider: true,
+          sortable: false,
+          value: "sport",
+        },
+        {
+          text: "경기시간",
+          align: "center",
+          divider: true,
+          sortable: true,
+          value: "time",
+        },
+        {
+          text: "리그명",
+          align: "center",
+          divider: true,
+          sortable: false,
+          value: "league",
+        },
+        {
+          text: "홈팀",
+          align: "center",
+          divider: true,
+          sortable: false,
+          value: "team1",
+        },
+        {
+          text: "원정팀",
+          align: "center",
+          divider: true,
+          sortable: false,
+          value: "team2",
+        },
+        {
+          text: "결과",
+          align: "center",
+          divider: true,
+          sortable: false,
+          value: "result",
+        },
+        {
+          text: "사이트명",
+          align: "center",
+          divider: true,
+          sortable: false,
+          value: "domain",
+        },
+        {
+          text: "해외",
+          align: "center",
+          divider: true,
+          sortable: false,
+          value: "overseas",
+        },
+        {
+          text: "VS",
+          align: "center",
+          divider: true,
+          sortable: false,
+          value: "vs",
+        },
+        {
+          text: "국내",
+          align: "center",
+          divider: true,
+          sortable: false,
+          value: "domestic",
+        },
+        {
+          text: "등록",
+          align: "center",
+          sortable: false,
+          value: "enrollment",
+        },
+      ],
+    };
   },
   methods: {
     rowClick(item) {
@@ -45,89 +133,16 @@ export default {
       }
     },
   },
-  data() {
-    return {
-      headers: [
-        {
-          text: "종목",
-          align: "center",
-          divider: true,
-          value: "sport",
-        },
-        {
-          text: "경기시간",
-          align: "center",
-          divider: true,
-          value: "time",
-        },
-        {
-          text: "리그명",
-          align: "center",
-          divider: true,
-          value: "league",
-        },
-        {
-          text: "홈팀",
-          align: "center",
-          divider: true,
-          value: "team1",
-        },
-        {
-          text: "원정팀",
-          align: "center",
-          divider: true,
-          value: "team2",
-        },
-        {
-          text: "결과",
-          align: "center",
-          divider: true,
-          value: "result",
-        },
-        {
-          text: "사이트명",
-          align: "center",
-          divider: true,
-          value: "domain",
-        },
-        {
-          text: "해외",
-          align: "center",
-          divider: true,
-          value: "overseas",
-        },
-        {
-          text: "VS",
-          align: "center",
-          divider: true,
-          value: "vs",
-        },
-        {
-          text: "국내",
-          align: "center",
-          divider: true,
-          value: "domestic",
-        },
-        {
-          text: "등록",
-          align: "center",
-          value: "enrollment",
-        },
-      ],
-      items: [],
-    };
-  },
 };
 </script>
 
 <style>
 #league-list-table {
-  margin-top: 28px;
+  margin-top: 48px;
 }
 
 #league-list-table table thead tr th {
-  background: gray;
-  height: 20px;
+  background: rgb(187, 184, 184);
 }
 
 #league-list-table table tr td {
