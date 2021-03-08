@@ -1,13 +1,9 @@
 <template>
   <v-app id="inspire">
-    <!-- <v-system-bar absolute>
+    <v-app-bar absolute clipped-right flat height="50">
       <v-spacer></v-spacer>
-      <v-icon>mdi-square</v-icon>
-      <v-icon>mdi-circle</v-icon>
-      <v-icon>mdi-triangle</v-icon>
-    </v-system-bar> -->
-
-    <v-app-bar absolute clipped-right flat height="50"> </v-app-bar>
+      <v-btn class="mr-1" color="primary" @click="siteAdd()"> 환경 설정 </v-btn>
+    </v-app-bar>
 
     <v-navigation-drawer app permanent width="230">
       <SiteListNav />
@@ -144,6 +140,16 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    siteAdd() {
+      // window.open(
+      //   "http://localhost:8081/#/siteAdd",
+      //   "사이트 추가",
+      //   "width=1500"
+      // );
+      this.$router.push({ name: "setHome" });
+    },
   },
 };
 </script>

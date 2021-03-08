@@ -6,6 +6,7 @@
     height="500px"
     dense
     fixed-header
+    sort-by="time"
     :loading="loadTable"
     loading-text="Loading... Please wait"
     disable-pagination
@@ -28,9 +29,7 @@ export default {
 
     this.$socket.on("getSiteInfoResponse", (res, err) => {
       this.loadTable = false;
-      this.items = res.data.sort((a, b) => {
-        return b.id - a.id;
-      });
+      this.items = res.data;
     });
   },
   data() {

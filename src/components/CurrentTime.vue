@@ -8,7 +8,7 @@
 <script>
 export default {
   created() {
-    this.date = this.$moment().format("M월 d일");
+    this.date = this.$moment().format("M월 D일");
     setInterval(() => {
       this.time = this.$moment().format("HH:mm:ss");
     }, 1000);
@@ -25,7 +25,7 @@ export default {
 <style>
 .date-text {
   color: blue;
-  margin-left: 20px;
+  margin-left: 15px;
 
   font-size: 23px;
   font-weight: bold;

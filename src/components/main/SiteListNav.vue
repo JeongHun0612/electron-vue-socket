@@ -2,7 +2,6 @@
   <div>
     <CurrentTime />
     <v-list class="pl-2" shaped>
-      <v-btn block rounded @click="siteAdd">사이트 추가</v-btn>
       <v-list-item v-for="n in 5" :key="n" link>
         <v-list-item-action>
           <v-checkbox v-model="selected"></v-checkbox>
@@ -24,16 +23,6 @@ export default {
     return {
       selected: true,
     };
-  },
-  methods: {
-    siteAdd() {
-      // window.open(
-      //   "http://localhost:8081/#/siteAdd",
-      //   "사이트 추가",
-      //   "width=1500"
-      // );
-      this.$router.push({ name: "setHome" });
-    },
   },
 };
 </script>
