@@ -153,7 +153,7 @@
 </template>
 
 <script>
-import CurrentTime from "../CurrentTime.vue";
+import CurrentTime from "../NavDate.vue";
 import SetNav from "./SetNav.vue";
 
 export default {

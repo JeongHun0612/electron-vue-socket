@@ -37,7 +37,7 @@
       </v-btn>
     </v-app-bar> -->
 
-    <v-main>
+    <v-main style="min-width: 1213px">
       <router-view />
     </v-main>
   </v-app>

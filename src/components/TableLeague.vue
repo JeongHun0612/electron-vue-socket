@@ -7,14 +7,12 @@
     dense
     fixed-header
     sort-by="time"
-    :loading="loadTable"
-    loading-text="Loading... Please wait"
     disable-pagination
     hide-default-footer
     @click:row="rowClick"
     class="elevation-1"
   >
-    <template v-slot:item.sport="{ item }">
+    <template v-slot:[`item.sport`]="{ item }">
       <v-icon color="orange"> {{ getSportIcon(item.sport) }} </v-icon>
     </template>
   </v-data-table>
@@ -23,18 +21,33 @@
 <script>
 export default {
   created() {
-    this.$socket.emit("getSiteInfo", (req) => {
-      console.log("test");
+    this.$socket.emit("getSite");
+
+    // this.$socket.on("getSiteResponse", (res) => {
+    //   console.log(res);
+    // });
+
+    // this.$socket.on("getSiteInfoResponse", (res, err) => {
+    //   this.items = res.data;
+    // });
+
+    this.$socket.emit("getGameInfoBySiteName", this.sites);
+    this.$socket.on("getGameInfoBySiteNameResponse", (res) => {
+      res.forEach((item) => {
+        this.items = this.items.concat(item.data);
+      });
     });
 
-    this.$socket.on("getSiteInfoResponse", (res, err) => {
-      this.loadTable = false;
-      this.items = res.data;
-    });
+    // this.$socket.emit("getAvailableSite", (req) => {});
+    // this.$socket.on("getAvailableSiteResponse", (res) => {
+    //   console.log(res);
+    // });
+
+    this.$socket.emit("getAvailableSiteInfo");
   },
   data() {
     return {
-      loadTable: true,
+      sites: ["pista", "토타임"],
       items: [],
       headers: [
         {
@@ -84,7 +97,7 @@ export default {
           align: "center",
           divider: true,
           sortable: false,
-          value: "domain",
+          value: "site",
         },
         {
           text: "해외",
@@ -117,18 +130,19 @@ export default {
     };
   },
   methods: {
-    rowClick(item) {
-      alert(item.id);
+    rowClick(idx) {
+      console.log(idx);
     },
     getSportIcon(sport) {
-      if (sport == "축구") {
-        return "mdi-soccer";
-      } else if (sport == "농구") {
-        return "mdi-basketball";
-      } else if (sport == "야구") {
-        return "mdi-baseball";
-      } else if (sport == "하키") {
-        return "mdi-hockey-puck";
+      switch (sport) {
+        case "축구":
+          return "mdi-soccer";
+        case "농구":
+          return "mdi-basketball";
+        case "축구":
+          return "mdi-baseball";
+        case "하키":
+          return "mdi-hockey-puck";
       }
     },
   },

@@ -25,7 +25,7 @@ export default {
 <style>
 .date-text {
   color: blue;
-  margin-left: 15px;
+  margin-left: 10px;
 
   font-size: 23px;
   font-weight: bold;
