@@ -1,53 +1,35 @@
 <template>
-  <v-data-table
-    id="league-list-table"
-    :headers="headers"
-    :items="items"
-    height="500px"
-    dense
-    fixed-header
-    sort-by="time"
-    disable-pagination
-    hide-default-footer
-    @click:row="rowClick"
-    class="elevation-1"
-  >
-    <template v-slot:[`item.sport`]="{ item }">
-      <v-icon color="orange"> {{ getSportIcon(item.sport) }} </v-icon>
-    </template>
-  </v-data-table>
+  <div>
+    <v-data-table
+      id="league-list-table"
+      :headers="headers"
+      :items="data"
+      height="500px"
+      dense
+      fixed-header
+      sort-by="time"
+      disable-pagination
+      hide-default-footer
+      @click:row="rowClick"
+      class="elevation-1"
+    >
+      <template v-slot:[`item.sport`]="{ item }">
+        <v-icon color="orange"> {{ getSportIcon(item.sport) }} </v-icon>
+      </template>
+    </v-data-table>
+    <Result :data="resultData" />
+  </div>
 </template>
 
 <script>
+import Result from "./Result";
+
 export default {
-  created() {
-    this.$socket.emit("getSite");
-
-    // this.$socket.on("getSiteResponse", (res) => {
-    //   console.log(res);
-    // });
-
-    // this.$socket.on("getSiteInfoResponse", (res, err) => {
-    //   this.items = res.data;
-    // });
-
-    this.$socket.emit("getGameInfoBySiteName", this.sites);
-    this.$socket.on("getGameInfoBySiteNameResponse", (res) => {
-      res.forEach((item) => {
-        this.items = this.items.concat(item.data);
-      });
-    });
-
-    // this.$socket.emit("getAvailableSite", (req) => {});
-    // this.$socket.on("getAvailableSiteResponse", (res) => {
-    //   console.log(res);
-    // });
-
-    this.$socket.emit("getAvailableSiteInfo");
-  },
+  components: { Result },
+  props: ["data"],
+  created() {},
   data() {
     return {
-      sites: ["pista", "토타임"],
       items: [],
       headers: [
         {
@@ -120,19 +102,93 @@ export default {
           sortable: false,
           value: "domestic",
         },
+      ],
+      resultData: [
         {
-          text: "등록",
-          align: "center",
-          sortable: false,
-          value: "enrollment",
+          overTitle: "해외 승무패",
+          domTitle: "국내 승무패",
+          overWin: "",
+          overDraw: "",
+          overLose: "",
+          domWin: "",
+          domDraw: "",
+          domLose: "",
+        },
+        {
+          overTitle: "해외 0.0",
+          domTitle: "국내 승무패",
+          overWin: "",
+          overDraw: "",
+          overLose: "",
+          domWin: "",
+          domDraw: "",
+          domLose: "",
+        },
+        {
+          overTitle: "해외 0.25",
+          domTitle: "국내 승무패",
+          overwin: "",
+          overDraw: "",
+          overLose: "",
+          domWin: "",
+          domDraw: "",
+          domLose: "",
+        },
+        {
+          overTitle: "해외 0.5",
+          domTitle: "국내 승무패",
+          overWin: "",
+          overDraw: "",
+          overLose: "",
+          domWin: "",
+          domDraw: "",
+          domLose: "",
+        },
+        {
+          overTitle: "해외 0.75",
+          domTitle: "국내 승무패",
+          overWin: "",
+          overDraw: "",
+          overLose: "",
+          domWin: "",
+          domDraw: "",
+          domLose: "",
+        },
+        {
+          overTitle: "해외 승무패",
+          domTitle: "국내 0.5",
+          overWin: "",
+          overDraw: "",
+          overLose: "",
+          domWin: "",
+          domDraw: "",
+          domLose: "",
+        },
+        {
+          overTitle: "해외 핸디",
+          domTitle: "국내 핸디",
+          overWin: "",
+          overDraw: "",
+          overLose: "",
+          domWin: "",
+          domDraw: "",
+          domLose: "",
+        },
+        {
+          overTitle: "해외 오버/언더",
+          domTitle: "국내 오버/언더",
+          overWin: "",
+          overDraw: "",
+          overLose: "",
+          domWin: "",
+          domDraw: "",
+          domLose: "",
         },
       ],
     };
   },
   methods: {
-    rowClick(idx) {
-      console.log(idx);
-    },
+    rowClick(idx) {},
     getSportIcon(sport) {
       switch (sport) {
         case "축구":

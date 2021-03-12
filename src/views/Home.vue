@@ -2,14 +2,12 @@
   <v-app id="inspire">
     <v-app-bar absolute clipped-right flat height="50">
       <v-spacer></v-spacer>
-      <!-- <v-btn class="mr-1" color="primary" @click="siteAdd()"> 환경 설정 </v-btn> -->
-
-      <DialogSetting />
+      <Setting />
     </v-app-bar>
 
     <v-navigation-drawer app permanent width="230">
-      <NavSite :data="siteListData" v-if="siteListisRender" />
       <NavDate />
+      <NavSite :data="siteListData" v-if="siteListisRender" />
     </v-navigation-drawer>
 
     <!-- <v-navigation-drawer app clipped permanent right>
@@ -23,8 +21,7 @@
     </v-navigation-drawer> -->
 
     <v-main class="pa-0">
-      <TableLeague />
-      <Result :data="resultData" />
+      <TableLeague :data="tableListData" />
     </v-main>
     <!-- <v-footer app inset> </v-footer> -->
   </v-app>
@@ -34,17 +31,15 @@
 import NavSite from "../components/NavSite";
 import NavDate from "../components/NavDate";
 import TableLeague from "../components/TableLeague";
-import Result from "../components/Result";
-import DialogSetting from "../components/DialogSetting";
+import Setting from "../components/Setting";
 
 export default {
   name: "Home",
   components: {
     TableLeague,
     NavSite,
-    Result,
     NavDate,
-    DialogSetting,
+    Setting,
   },
   created() {
     this.$socket.emit("getAvailableSite");
@@ -57,56 +52,27 @@ export default {
       });
       this.siteListisRender = true;
     });
+
+    this.$socket.emit("getGameInfoBySiteName", this.sites);
+    this.$socket.on("getGameInfoBySiteNameResponse", (res) => {
+      res.forEach((item) => {
+        this.tableListData = this.tableListData.concat(item.data);
+      });
+    });
   },
   data() {
     return {
+      sites: ["토타임", "pista"],
       siteListisRender: false,
       siteListData: [],
-      resultData: [
-        {
-          overTitle: "해외 승무패",
-          domTitle: "국내 승무패",
-        },
-        {
-          overTitle: "해외 0.0",
-          domTitle: "국내 승무패",
-        },
-        {
-          overTitle: "해외 0.1",
-          domTitle: "국내 승무패",
-        },
-        {
-          overTitle: "해외 0.2",
-          domTitle: "국내 승무패",
-        },
-        {
-          overTitle: "해외 0.3",
-          domTitle: "국내 승무패",
-        },
-        {
-          overTitle: "해외 0.4",
-          domTitle: "국내 0.5",
-        },
-        {
-          overTitle: "해외 0.5",
-          domTitle: "국내 핸디",
-        },
-        {
-          overTitle: "해외 0.6",
-          domTitle: "국내 오버/언더",
-        },
-      ],
+      tableListData: [],
     };
   },
-  methods: {
-    siteAdd() {
-      // window.open(
-      //   "http://localhost:8081/#/siteAdd",
-      //   "사이트 추가",
-      //   "width=1500"
-      // );
-      this.$router.push({ name: "setHome" });
-    },
-  },
+  computed: {},
+  // methods: {
+  //   siteAdd() {
+  //     this.$router.push({ name: "setHome" });
+  //   },
+  // },
 };
 </script>

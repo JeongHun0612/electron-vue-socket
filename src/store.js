@@ -4,13 +4,16 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-
-  },
-  mutations: {
-
-  },
-  actions: {
-
-  }
+    state: {
+        domBet: "",
+        overBet: "",
+    },
+    mutations: {
+        getDomBet(state, payload) {
+            state.domBet = payload;
+        },
+        getOverBet(state, payload) {
+            state.overBet = payload;
+        }
+    },
 })

@@ -12,7 +12,7 @@
           <v-row>
             <v-col md="12">
               <v-text-field
-                v-model="domesticBet"
+                v-model="domBet"
                 label="국내 배팅금 설정"
                 dense
                 append-outer-icon="mdi-currency-krw"
@@ -22,7 +22,7 @@
             ></v-col>
             <v-col md="12">
               <v-text-field
-                v-model="overseasBet"
+                v-model="overBet"
                 dense
                 label="해외 배팅금 설정"
                 append-outer-icon="mdi-currency-krw"
@@ -35,23 +35,31 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="blue darken-1" text @click="dialog = false">
-          Close
-        </v-btn>
-        <v-btn color="blue darken-1" text @click="dialog = false"> Save </v-btn>
+        <v-btn color="blue darken-1" text @click="dialog = false"> 닫기 </v-btn>
+        <v-btn color="blue darken-1" text @click="Setting()"> 저장 </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+
 export default {
   data() {
     return {
       dialog: false,
-      domesticBet: "",
-      overseasBet: "",
+      domBet: "",
+      overBet: "",
     };
+  },
+
+  methods: {
+    ...mapMutations(["getDomBet", "getOverBet"]),
+    Setting() {
+      this.getDomBet(this.domBet);
+      this.dialog = false;
+    },
   },
 };
 </script>
