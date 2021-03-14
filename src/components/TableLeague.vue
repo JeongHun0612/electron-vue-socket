@@ -17,17 +17,13 @@
         <v-icon color="orange"> {{ getSportIcon(item.sport) }} </v-icon>
       </template>
     </v-data-table>
-    <Result :data="resultData" />
   </div>
 </template>
 
 <script>
-import Result from "./Result";
 
 export default {
-  components: { Result },
   props: ["data"],
-  created() {},
   data() {
     return {
       items: [],
@@ -103,102 +99,22 @@ export default {
           value: "domestic",
         },
       ],
-      resultData: [
-        {
-          overTitle: "해외 승무패",
-          domTitle: "국내 승무패",
-          overWin: "",
-          overDraw: "",
-          overLose: "",
-          domWin: "",
-          domDraw: "",
-          domLose: "",
-        },
-        {
-          overTitle: "해외 0.0",
-          domTitle: "국내 승무패",
-          overWin: "",
-          overDraw: "",
-          overLose: "",
-          domWin: "",
-          domDraw: "",
-          domLose: "",
-        },
-        {
-          overTitle: "해외 0.25",
-          domTitle: "국내 승무패",
-          overwin: "",
-          overDraw: "",
-          overLose: "",
-          domWin: "",
-          domDraw: "",
-          domLose: "",
-        },
-        {
-          overTitle: "해외 0.5",
-          domTitle: "국내 승무패",
-          overWin: "",
-          overDraw: "",
-          overLose: "",
-          domWin: "",
-          domDraw: "",
-          domLose: "",
-        },
-        {
-          overTitle: "해외 0.75",
-          domTitle: "국내 승무패",
-          overWin: "",
-          overDraw: "",
-          overLose: "",
-          domWin: "",
-          domDraw: "",
-          domLose: "",
-        },
-        {
-          overTitle: "해외 승무패",
-          domTitle: "국내 0.5",
-          overWin: "",
-          overDraw: "",
-          overLose: "",
-          domWin: "",
-          domDraw: "",
-          domLose: "",
-        },
-        {
-          overTitle: "해외 핸디",
-          domTitle: "국내 핸디",
-          overWin: "",
-          overDraw: "",
-          overLose: "",
-          domWin: "",
-          domDraw: "",
-          domLose: "",
-        },
-        {
-          overTitle: "해외 오버/언더",
-          domTitle: "국내 오버/언더",
-          overWin: "",
-          overDraw: "",
-          overLose: "",
-          domWin: "",
-          domDraw: "",
-          domLose: "",
-        },
-      ],
     };
   },
   methods: {
-    rowClick(idx) {},
+    rowClick(idx) {
+    },
     getSportIcon(sport) {
       switch (sport) {
         case "축구":
           return "mdi-soccer";
         case "농구":
           return "mdi-basketball";
-        case "축구":
+        case "야구":
           return "mdi-baseball";
         case "하키":
           return "mdi-hockey-puck";
+        // 배구, 테니스
       }
     },
   },

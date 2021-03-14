@@ -21,7 +21,7 @@
     </v-navigation-drawer> -->
 
     <v-main class="pa-0">
-      <TableLeague :data="tableListData" />
+      <Main />
     </v-main>
     <!-- <v-footer app inset> </v-footer> -->
   </v-app>
@@ -30,13 +30,13 @@
 <script>
 import NavSite from "../components/NavSite";
 import NavDate from "../components/NavDate";
-import TableLeague from "../components/TableLeague";
+import Main from "../components/Main";
 import Setting from "../components/Setting";
 
 export default {
   name: "Home",
   components: {
-    TableLeague,
+    Main,
     NavSite,
     NavDate,
     Setting,
@@ -52,20 +52,12 @@ export default {
       });
       this.siteListisRender = true;
     });
-
-    this.$socket.emit("getGameInfoBySiteName", this.sites);
-    this.$socket.on("getGameInfoBySiteNameResponse", (res) => {
-      res.forEach((item) => {
-        this.tableListData = this.tableListData.concat(item.data);
-      });
-    });
   },
+
   data() {
     return {
-      sites: ["토타임", "pista"],
       siteListisRender: false,
       siteListData: [],
-      tableListData: [],
     };
   },
   computed: {},
