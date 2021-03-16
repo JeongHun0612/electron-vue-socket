@@ -42,8 +42,11 @@ export default {
     Setting,
   },
   created() {
-    this.$socket.emit("getAvailableSite");
-    this.$socket.on("getAvailableSiteResponse", (res) => {
+    this.$socket.emit("connectSocket");
+    this.$socket.on("connectSocketResponse", (res) => {});
+
+    this.$socket.emit("getSiteStatus");
+    this.$socket.on("getSiteStatusResponse", (res) => {
       res.forEach((item, index) => {
         this.siteListData.push({
           status: item.status,

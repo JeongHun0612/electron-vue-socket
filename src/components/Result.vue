@@ -3,9 +3,10 @@
     <v-row>
       <v-card v-for="(item, index) in data" :key="index" width="170px">
         <ResultList
+          :style="getTest(index)"
           :idx="index"
-          :overTitle="item.overTitle"
-          :domTitle="item.domTitle"
+          :overTitle="overTitle[index]"
+          :domTitle="domTitle[index]"
           :overWin="item.overWin"
           :overDraw="item.overDraw"
           :overLose="item.overLose"
@@ -25,7 +26,39 @@ export default {
   props: ["data"],
 
   data() {
-    return {};
+    return {
+      overTitle: [
+        "해외 승무패",
+        "해외 0.0",
+        "해외 0.25",
+        "해외 0.5",
+        "해외 0.7",
+        "해외 승무패",
+        "해외 핸디",
+        "해외 오버/언더",
+      ],
+      domTitle: [
+        "국내 승무패",
+        "국내 승무패",
+        "국내 승무패",
+        "국내 승무패",
+        "국내 승무패",
+        "국내 0.5",
+        "국내 핸디",
+        "국내 오버/언더",
+      ],
+      max: 0,
+    };
+  },
+  methods: {
+    getTest(index) {
+      if (this.data[index].result > this.max) {
+        this.max = this.data[index].result;
+      }
+      if (this.max == this.data[index].result) {
+        return "border: 4px solid red";
+      }
+    },
   },
 };
 </script>

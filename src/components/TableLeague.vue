@@ -7,7 +7,7 @@
       height="500px"
       dense
       fixed-header
-      sort-by="time"
+      :sort-by="['time', 'league']"
       disable-pagination
       hide-default-footer
       @click:row="rowClick"
@@ -17,12 +17,16 @@
         <v-icon color="orange"> {{ getSportIcon(item.sport) }} </v-icon>
       </template>
     </v-data-table>
+    <Result :data="resultData" />
   </div>
 </template>
 
 <script>
+import Result from "./Result";
+import data from "@/data";
 
 export default {
+  components: { Result },
   props: ["data"],
   data() {
     return {
@@ -46,7 +50,7 @@ export default {
           text: "리그명",
           align: "center",
           divider: true,
-          sortable: false,
+          sortable: true,
           value: "league",
         },
         {
@@ -99,10 +103,13 @@ export default {
           value: "domestic",
         },
       ],
+      resultData: [],
     };
   },
   methods: {
     rowClick(idx) {
+      this.resultData = [];
+      this.resultData = data.resultData[idx.id].data;
     },
     getSportIcon(sport) {
       switch (sport) {
@@ -114,7 +121,10 @@ export default {
           return "mdi-baseball";
         case "하키":
           return "mdi-hockey-puck";
-        // 배구, 테니스
+        case "배구":
+          return "mdi-volleyball";
+        case "테니스":
+          return "mdi-tennis-ball";
       }
     },
   },

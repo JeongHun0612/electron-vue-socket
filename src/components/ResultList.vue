@@ -4,7 +4,8 @@
       <div class="grey lighten-2">
         {{ overTitle }}
       </div>
-      <v-row no-gutters>
+      <v-row no-gutters class="grey lighten-3">
+        <br />
         <v-col sm="4">
           <div>{{ overWin }}</div>
         </v-col>
@@ -18,7 +19,8 @@
       <div class="grey lighten-2">
         {{ domTitle }}
       </div>
-      <v-row no-gutters>
+      <v-row no-gutters class="grey lighten-3">
+        <br />
         <v-col sm="4">
           <div>{{ domWin }}</div>
         </v-col>
