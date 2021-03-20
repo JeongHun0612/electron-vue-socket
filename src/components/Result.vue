@@ -1,7 +1,7 @@
 <template>
   <v-container fluid style="margin-left: 1px">
     <v-row>
-      <v-card v-for="(item, index) in data" :key="index" width="170px">
+      <v-card v-for="(item, index) in data" :key="index" width="168px">
         <ResultList
           :style="getTest(index)"
           :idx="index"
@@ -51,11 +51,11 @@ export default {
     };
   },
   methods: {
-    getTest(index) {
-      if (this.data[index].result > this.max) {
-        this.max = this.data[index].result;
+    getTest(idx) {
+      if (this.data[idx].result > this.max) {
+        this.max = this.data[idx].result;
       }
-      if (this.max == this.data[index].result) {
+      if (this.max == this.data[idx].result) {
         return "border: 4px solid red";
       }
     },

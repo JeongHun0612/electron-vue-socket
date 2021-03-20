@@ -4,10 +4,10 @@
       id="league-list-table"
       :headers="headers"
       :items="data"
+      :sort-by="['time', 'league']"
       height="500px"
       dense
       fixed-header
-      :sort-by="['time', 'league']"
       disable-pagination
       hide-default-footer
       @click:row="rowClick"
@@ -17,16 +17,11 @@
         <v-icon color="orange"> {{ getSportIcon(item.sport) }} </v-icon>
       </template>
     </v-data-table>
-    <Result :data="resultData" />
   </div>
 </template>
 
 <script>
-import Result from "./Result";
-import data from "@/data";
-
 export default {
-  components: { Result },
   props: ["data"],
   data() {
     return {
@@ -103,13 +98,11 @@ export default {
           value: "domestic",
         },
       ],
-      resultData: [],
     };
   },
   methods: {
     rowClick(idx) {
-      this.resultData = [];
-      this.resultData = data.resultData[idx.id].data;
+      this.$emit("rowClick", idx.id);
     },
     getSportIcon(sport) {
       switch (sport) {
@@ -123,8 +116,6 @@ export default {
           return "mdi-hockey-puck";
         case "배구":
           return "mdi-volleyball";
-        case "테니스":
-          return "mdi-tennis-ball";
       }
     },
   },
@@ -138,9 +129,5 @@ export default {
 
 #league-list-table table thead tr th {
   background: rgb(187, 184, 184);
-}
-
-#league-list-table table tr td {
-  height: 10px;
 }
 </style>

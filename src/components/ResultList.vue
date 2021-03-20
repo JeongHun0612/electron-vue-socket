@@ -2,18 +2,18 @@
   <div class="result-list" style="padding: 1px">
     <div class="result-list-header">
       <div class="grey lighten-2">
-        {{ overTitle }}
+        {{ this.overTitle }}
       </div>
       <v-row no-gutters class="grey lighten-3">
         <br />
         <v-col sm="4">
-          <div>{{ overWin }}</div>
+          <div>{{ this.overWin }}</div>
         </v-col>
         <v-col sm="4">
-          <div>{{ overDraw }}</div>
+          <div>{{ this.overDraw }}</div>
         </v-col>
         <v-col sm="4">
-          <div>{{ overLose }}</div>
+          <div>{{ this.overLose }}</div>
         </v-col>
       </v-row>
       <div class="grey lighten-2">
@@ -22,13 +22,13 @@
       <v-row no-gutters class="grey lighten-3">
         <br />
         <v-col sm="4">
-          <div>{{ domWin }}</div>
+          <div>{{ this.domWin }}</div>
         </v-col>
         <v-col sm="4">
-          <div>{{ domDraw }}</div>
+          <div>{{ this.domDraw }}</div>
         </v-col>
         <v-col sm="4">
-          <div>{{ domLose }}</div>
+          <div>{{ this.domLose }}</div>
         </v-col>
       </v-row>
     </div>
@@ -100,16 +100,21 @@ export default {
   props: [
     "idx",
     "overTitle",
-    "domTitle",
     "overWin",
     "overDraw",
     "overLose",
+    "domTitle",
     "domWin",
     "domDraw",
     "domLose",
   ],
   computed: {
     ...mapState(["domBet"]),
+  },
+  data() {
+    return {
+      result: {},
+    };
   },
 };
 </script>
