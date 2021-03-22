@@ -6,7 +6,7 @@
         :status="item.status"
       ></NavSiteList>
     </v-list> -->
-  <v-card>
+  <v-card class="ma-2">
     <v-card-title>
       <v-text-field
         v-model="search"

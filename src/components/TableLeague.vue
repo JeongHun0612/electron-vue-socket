@@ -124,7 +124,7 @@ export default {
 
 <style>
 #league-list-table {
-  margin-top: 48px;
+  margin-top: 50px;
 }
 
 #league-list-table table thead tr th {

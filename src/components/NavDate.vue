@@ -1,8 +1,12 @@
 <template>
-  <v-sheet class="pa-2" color="grey lighten-5" height="50" width="100%">
+  <!-- <v-sheet class="pa-2" color="grey lighten-5" height="50" width="100%">
     <span class="date-text"> {{ date }} </span>
     <span class="time-text"> {{ time }} </span>
-  </v-sheet>
+  </v-sheet> -->
+  <v-card class="pa-2" color="grey lighten-4" flat>
+    <span class="date-text"> {{ date }} </span>
+    <span class="time-text"> {{ time }} </span>
+  </v-card>
 </template>
 
 <script>

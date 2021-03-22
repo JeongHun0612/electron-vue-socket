@@ -5,7 +5,7 @@
       <Setting />
     </v-app-bar>
 
-    <v-navigation-drawer app permanent width="270">
+    <v-navigation-drawer app permanent width="250">
       <NavLeft />
     </v-navigation-drawer>
 
