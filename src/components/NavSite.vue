@@ -1,13 +1,7 @@
 <template>
-  <!-- <v-list class="pl-2" shaped v-for="(item, index) in data" :key="index">
-      <NavSiteList
-        :idx="index"
-        :siteName="item.siteName"
-        :status="item.status"
-      ></NavSiteList>
-    </v-list> -->
   <v-card class="ma-2">
-    <v-card-title>
+    <v-card-subtitle> 적용 사이트 선택 </v-card-subtitle>
+    <v-card-text>
       <v-text-field
         v-model="search"
         append-icon="mdi-magnify"
@@ -16,7 +10,7 @@
         single-line
         hide-details
       ></v-text-field>
-    </v-card-title>
+    </v-card-text>
     <v-data-table
       v-model="selected"
       :headers="headers"
@@ -47,17 +41,21 @@
         <v-badge :color="getStatus(item.status)" dot></v-badge>
       </template>
     </v-data-table>
-    <v-btn @click="test">btn</v-btn>
+    <v-btn @click="test">test</v-btn>
   </v-card>
 </template>
 
 <script>
-import NavSiteList from "./NavSiteList";
+import { mapMutations } from "vuex";
 
 export default {
-  components: { NavSiteList },
   props: ["data"],
-  created() {},
+  created() {
+    console.log(this.selected);
+    if (this.selected.length != 0) {
+      console.log("test");
+    }
+  },
   data() {
     return {
       search: "",
@@ -67,23 +65,32 @@ export default {
         { text: "상태", align: "center", value: "status" },
       ],
       items: [],
+      siteData: [],
     };
   },
-
   methods: {
+    ...mapMutations(["getSites"]),
+
     getStatus(status) {
       switch (status) {
-        case false:
+        case 0:
           return "red darken-2";
-        case true:
+        case 1:
           return "green darken-2";
+        case 2:
+          return "yellow darken-2";
       }
     },
     test() {
-      console.log(this.selected);
-    },
-    isSelectable() {
-      console.log("test");
+      this.selected.forEach((item) => {
+        this.siteData = this.siteData.concat(item.siteName);
+      });
+      console.log(this.siteData);
+      this.$socket.emit("assignSite", this.siteData);
+      this.$socket.on("assignSite", (res) => {
+        console.log("assignSite");
+      });
+      this.getSites(this.sites);
     },
   },
 };

@@ -40,14 +40,12 @@ export default {
   },
   created() {
     this.$socket.emit("connectSocket", this.user);
-    this.$socket.on("connectSocket", (res) => {
-      console.log("connectSocket");
-    });
+    this.$socket.on("connectSocket", (res) => {});
 
-    this.$socket.emit("assginSite");
-    this.$socket.on("assginSiteResponse", (res) => {
-      console.log("assginSiteResponse");
-    });
+    // this.$socket.emit("assignSite";
+    // this.$socket.on("assignSite", (res) => {
+    //   console.log("assignSite");
+    // });
 
     this.$socket.emit("disconnect");
     this.$socket.on("disconnectResponse", (res) => {

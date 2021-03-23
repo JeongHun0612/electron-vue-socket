@@ -38,7 +38,7 @@
           <div class="grey lighten-2">배팅금</div>
         </v-col>
         <v-col sm="8">
-          <div style="text-align: right">{{ domBet }}</div>
+          <div style="text-align: right">{{ sites }}</div>
         </v-col>
       </v-row>
       <v-row no-gutters dense>
@@ -109,7 +109,7 @@ export default {
     "domLose",
   ],
   computed: {
-    ...mapState(["domBet"]),
+    ...mapState(["sites"]),
   },
   data() {
     return {

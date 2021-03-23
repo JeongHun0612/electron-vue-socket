@@ -7,6 +7,7 @@ export default new Vuex.Store({
     state: {
         domBet: "",
         overBet: "",
+        sites: [],
     },
     mutations: {
         getDomBet(state, payload) {
@@ -14,6 +15,9 @@ export default new Vuex.Store({
         },
         getOverBet(state, payload) {
             state.overBet = payload;
+        },
+        getSites(state, payload) {
+            state.sites = payload
         }
     },
 })
