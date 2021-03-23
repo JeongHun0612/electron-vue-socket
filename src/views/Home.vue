@@ -39,8 +39,28 @@ export default {
     Setting,
   },
   created() {
-    this.$socket.emit("connectSocket");
-    this.$socket.on("connectSocketResponse", (res) => {});
+    this.$socket.emit("connectSocket", this.user);
+    this.$socket.on("connectSocket", (res) => {
+      console.log(res);
+    });
+
+    this.$socket.emit("assginSite");
+    this.$socket.on("assginSiteResponse", (res) => {
+      console.log("assginSiteResponse");
+    });
+
+    this.$socket.emit("disconnect");
+    this.$socket.on("disconnectResponse", (res) => {
+      console.log("disconnectResponse");
+    });
+  },
+  data() {
+    return {
+      user: {
+        id: "1234",
+        pw: "1234",
+      },
+    };
   },
 };
 </script>
