@@ -41,7 +41,7 @@ export default {
   created() {
     this.$socket.emit("connectSocket", this.user);
     this.$socket.on("connectSocket", (res) => {
-      console.log(res);
+      console.log("connectSocket");
     });
 
     this.$socket.emit("assginSite");
