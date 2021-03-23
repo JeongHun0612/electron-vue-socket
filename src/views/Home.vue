@@ -40,7 +40,9 @@ export default {
   },
   created() {
     this.$socket.emit("connectSocket", this.user);
-    this.$socket.on("connectSocket", (res) => {});
+    this.$socket.on("connectSocket", (res) => {
+      console.log(res);
+    });
 
     // this.$socket.emit("assignSite";
     // this.$socket.on("assignSite", (res) => {
