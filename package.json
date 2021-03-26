@@ -15,6 +15,7 @@
     "lint": "eslint --ext .js,.vue src",
     "dependencies": {
         "core-js": "^2.6.5",
+        "v-money": "^0.8.1",
         "vue": "^2.6.10",
         "vue-moment": "^4.1.0",
         "vue-router": "^3.0.3",

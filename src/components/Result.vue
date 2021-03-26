@@ -3,7 +3,7 @@
     <v-row>
       <v-card v-for="(item, index) in data" :key="index" width="165.7px">
         <ResultList
-          :style="getTest(index)"
+          :style="getMaxResult(index)"
           :idx="index"
           :overTitle="overTitle[index]"
           :domTitle="domTitle[index]"
@@ -51,12 +51,12 @@ export default {
     };
   },
   methods: {
-    getTest(idx) {
+    getMaxResult(idx) {
       if (this.data[idx].result > this.max) {
         this.max = this.data[idx].result;
       }
       if (this.max == this.data[idx].result) {
-        return "border: 4px solid red";
+        return "border: 3px solid red";
       }
     },
   },

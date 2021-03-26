@@ -4,8 +4,11 @@
     <div class="ma-2">
       <NavSite :data="siteListData" />
       <NavBet />
+      <v-btn class="mt-3" color="primary" block @click="startBtn">
+        <v-icon left size="25px"> mdi-arrow-right-drop-circle-outline</v-icon>
+        분석 시작
+      </v-btn>
     </div>
-    <v-btn @click="test">분석 시작</v-btn>
   </div>
 </template>
 
@@ -14,7 +17,7 @@ import data from "@/data";
 import NavDate from "./NavDate";
 import NavSite from "./NavSite";
 import NavBet from "./NavBet";
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   components: { NavDate, NavSite, NavBet },
@@ -23,7 +26,6 @@ export default {
     // this.$socket.on("getSiteStatus", (res) => {
     //   this.siteListData = res;
     // });
-
     // data test 버전
     this.siteListData = data.siteListData;
   },
@@ -33,12 +35,26 @@ export default {
     };
   },
   computed: {
-    ...mapState(["siteData"]),
+    ...mapState(["siteData", "currentDomBet", "currentDomWinnings"]),
   },
   methods: {
-    test() {
-      if (this.siteData.length != 0) {
-        console.log(this.siteData);
+    ...mapMutations(["getDomBet", "getDomWinnigs"]),
+
+    startBtn() {
+      if (
+        this.siteData.length != 0 &&
+        this.currentDomBet != 0 &&
+        this.currentDomWinnings != 0
+      ) {
+        this.getDomBet(this.currentDomBet);
+        this.getDomWinnigs(this.currentDomWinnings);
+
+        this.$socket.emit("assignSite", this.siteData);
+        this.$socket.on("assignSite", (res) => {
+          console.log("assignSite");
+        });
+      } else {
+        alert("사이트와 배팅금을 설정해주세요.");
       }
     },
   },

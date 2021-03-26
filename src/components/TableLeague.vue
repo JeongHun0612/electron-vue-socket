@@ -13,6 +13,9 @@
       @click:row="rowClick"
       class="elevation-1"
     >
+      <template v-slot:no-data>
+        <span>경기 정보가 없습니다.</span>
+      </template>
       <template v-slot:[`item.sport`]="{ item }">
         <v-icon color="orange"> {{ getSportIcon(item.sport) }} </v-icon>
       </template>
