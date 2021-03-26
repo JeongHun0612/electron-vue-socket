@@ -7,15 +7,13 @@
         label="국내 배팅금 설정"
         dense
         outlined
-        height="5"
-        append-outer-icon="mdi-currency-krw"
+        @input="setDomBet"
       ></v-text-field>
       <v-text-field
-        v-model="overBet"
+        v-model="domWinnigs"
         label="국내 당청금 설정"
         dense
         outlined
-        append-outer-icon="mdi-currency-krw"
       ></v-text-field>
     </v-card-text>
   </v-card>
@@ -28,12 +26,12 @@ export default {
   data() {
     return {
       domBet: "",
-      overBet: "",
+      domWinnigs: "",
     };
   },
   methods: {
-    ...mapMutations(["getDomBet", "getOverBet"]),
-    Setting() {
+    ...mapMutations(["getDomBet", "getDomWinnigs"]),
+    setDomBet() {
       this.getDomBet(this.domBet);
     },
   },

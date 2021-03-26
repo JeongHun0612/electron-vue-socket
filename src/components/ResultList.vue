@@ -94,8 +94,6 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-
 export default {
   props: [
     "idx",
@@ -108,9 +106,6 @@ export default {
     "domDraw",
     "domLose",
   ],
-  computed: {
-    ...mapState(["sites"]),
-  },
   data() {
     return {
       result: {},

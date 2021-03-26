@@ -5,7 +5,7 @@
       <NavSite :data="siteListData" />
       <NavBet />
     </div>
-    <v-btn>btn</v-btn>
+    <v-btn @click="test">분석 시작</v-btn>
   </div>
 </template>
 
@@ -14,6 +14,7 @@ import data from "@/data";
 import NavDate from "./NavDate";
 import NavSite from "./NavSite";
 import NavBet from "./NavBet";
+import { mapState } from "vuex";
 
 export default {
   components: { NavDate, NavSite, NavBet },
@@ -30,6 +31,16 @@ export default {
     return {
       siteListData: [],
     };
+  },
+  computed: {
+    ...mapState(["siteData"]),
+  },
+  methods: {
+    test() {
+      if (this.siteData.length != 0) {
+        console.log(this.siteData);
+      }
+    },
   },
 };
 </script>

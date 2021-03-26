@@ -12,36 +12,30 @@
       ></v-text-field>
     </v-card-text>
     <v-data-table
-      v-model="selected"
       :headers="headers"
       :items="data"
       :search="search"
       height="250px"
       dense
-      item-key="siteName"
-      show-select
       fixed-header
       disable-sort
       hide-default-footer
       class="elevation-1"
     >
-      <template
-        v-slot:[`item.data-table-select`]="{ item, isSelected, select }"
-      >
+      <template v-slot:[`item.selected`]="{ item }">
         <v-simple-checkbox
-          :value="isSelected"
-          :disabled="!item.status"
+          v-model="item.selected"
+          :disabled="getDisabled(item.status)"
           :ripple="false"
           color="primary"
-          @input="select($event)"
-        >
-        </v-simple-checkbox>
+          @click="setSiteData"
+        ></v-simple-checkbox>
       </template>
+
       <template v-slot:[`item.status`]="{ item }">
         <v-badge :color="getStatus(item.status)" dot></v-badge>
       </template>
     </v-data-table>
-    <v-btn @click="test">test</v-btn>
   </v-card>
 </template>
 
@@ -50,17 +44,12 @@ import { mapMutations } from "vuex";
 
 export default {
   props: ["data"],
-  created() {
-    console.log(this.selected);
-    if (this.selected.length != 0) {
-      console.log("test");
-    }
-  },
   data() {
     return {
       search: "",
       selected: [],
       headers: [
+        { text: "선택", align: "center", value: "selected" },
         { text: "사이트명", align: "center", value: "siteName" },
         { text: "상태", align: "center", value: "status" },
       ],
@@ -69,7 +58,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["getSites"]),
+    ...mapMutations(["getSiteData"]),
 
     getStatus(status) {
       switch (status) {
@@ -81,16 +70,26 @@ export default {
           return "yellow darken-2";
       }
     },
-    test() {
-      this.selected.forEach((item) => {
-        this.siteData = this.siteData.concat(item.siteName);
+    getDisabled(status) {
+      switch (status) {
+        case 0:
+          return true;
+        case 1:
+          return false;
+        case 2:
+          return true;
+      }
+    },
+    setSiteData() {
+      this.siteData = [];
+      this.data.forEach((item) => {
+        if (item.selected) this.siteData = this.siteData.concat(item.siteName);
       });
-      console.log(this.siteData);
       this.$socket.emit("assignSite", this.siteData);
       this.$socket.on("assignSite", (res) => {
         console.log("assignSite");
       });
-      this.getSites(this.sites);
+      this.getSiteData(this.siteData);
     },
   },
 };

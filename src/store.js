@@ -6,18 +6,18 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         domBet: "",
-        overBet: "",
-        sites: [],
+        domWinnigs: "",
+        siteData: [],
     },
     mutations: {
         getDomBet(state, payload) {
             state.domBet = payload;
         },
-        getOverBet(state, payload) {
-            state.overBet = payload;
+        getDomWinnigs(state, payload) {
+            state.domWinnigs = payload;
         },
-        getSites(state, payload) {
-            state.sites = payload
+        getSiteData(state, payload) {
+            state.siteData = payload
         }
     },
 })

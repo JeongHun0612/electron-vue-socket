@@ -13,14 +13,14 @@ import data from "@/data";
 export default {
   components: { TableLeague, Result },
   created() {
-    // this.$socket.emit("getResultData");
-    // this.$socket.on("getResultData", (res) => {
-    //   console.log(res);
-    //   this.tableListData = [];
-    //   res.forEach((item) => {
-    //     this.tableListData = this.tableListData.concat(item.data);
-    //   });
-    // });
+    this.$socket.emit("getResultData");
+    this.$socket.on("getResultData", (res) => {
+      console.log(res);
+      // this.tableListData = [];
+      // res.forEach((item) => {
+      //   this.tableListData = this.tableListData.concat(item.data);
+      // });
+    });
 
     // data test 버전
     this.tableListData = data.tableListData;
