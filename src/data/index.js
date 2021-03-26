@@ -7695,5 +7695,5 @@ export default {
             ]
         }
     ],
-    siteListData: [{ siteName: "pista", status: true }, { siteName: "배토", status: false }, { siteName: "스포츠", status: true }, { siteName: "마리오", status: true }, { siteName: "피넛", status: true }]
+    siteListData: [{ siteName: "pista", status: 1 }, { siteName: "배토", status: 0 }, { siteName: "스포츠", status: 1 }, { siteName: "마리오", status: 1 }, { siteName: "피넛", status: 2 }]
 }

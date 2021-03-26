@@ -1,7 +1,7 @@
 <template>
-  <v-container fluid style="margin-left: 1px">
+  <v-container fluid>
     <v-row>
-      <v-card v-for="(item, index) in data" :key="index" width="168px">
+      <v-card v-for="(item, index) in data" :key="index" width="165.7px">
         <ResultList
           :style="getTest(index)"
           :idx="index"

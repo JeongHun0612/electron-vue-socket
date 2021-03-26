@@ -44,11 +44,6 @@ export default {
       console.log(res);
     });
 
-    // this.$socket.emit("assignSite";
-    // this.$socket.on("assignSite", (res) => {
-    //   console.log("assignSite");
-    // });
-
     this.$socket.emit("disconnect");
     this.$socket.on("disconnectResponse", (res) => {
       console.log("disconnectResponse");

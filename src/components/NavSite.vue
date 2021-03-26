@@ -1,5 +1,5 @@
 <template>
-  <v-card class="ma-2">
+  <v-card>
     <v-card-subtitle> 적용 사이트 선택 </v-card-subtitle>
     <v-card-text>
       <v-text-field
@@ -16,7 +16,7 @@
       :headers="headers"
       :items="data"
       :search="search"
-      height="300px"
+      height="250px"
       dense
       item-key="siteName"
       show-select

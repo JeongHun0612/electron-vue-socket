@@ -1,20 +1,21 @@
 <template>
-  <v-card class="ma-2">
-    <v-card-subtitle> 배팅금 설정 </v-card-subtitle>
+  <v-card>
+    <v-card-subtitle> 국내 배팅금 설정 </v-card-subtitle>
     <v-card-text>
       <v-text-field
         v-model="domBet"
         label="국내 배팅금 설정"
         dense
-        clearable
         outlined
+        height="5"
+        append-outer-icon="mdi-currency-krw"
       ></v-text-field>
       <v-text-field
         v-model="overBet"
-        dense
         label="국내 당청금 설정"
-        clearable
+        dense
         outlined
+        append-outer-icon="mdi-currency-krw"
       ></v-text-field>
     </v-card-text>
   </v-card>
