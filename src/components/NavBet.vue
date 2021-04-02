@@ -15,13 +15,13 @@
       ></v-text-field>
 
       <v-text-field
-        v-model.lazy="domWinnigs"
+        v-model.lazy="domWinnings"
         v-money="money"
         label="국내 당청금 설정"
         dense
         outlined
         append-icon="mdi-currency-krw"
-        @input="setDomWinnigs"
+        @input="setDomWinnings"
       ></v-text-field>
     </v-card-text>
   </v-card>
@@ -35,7 +35,7 @@ export default {
   data() {
     return {
       domBet: "",
-      domWinnigs: "",
+      domWinnings: "",
       money: {
         decimal: "",
         thousands: "",
@@ -46,13 +46,13 @@ export default {
   },
   directives: { money: VMoney },
   methods: {
-    ...mapMutations(["getCurrentDomBet", "getCurrentDomWinnigs"]),
+    ...mapMutations(["setCurrentDomBet", "setCurrentDomWinnings"]),
 
     setDomBet() {
-      this.getCurrentDomBet(this.domBet);
+      this.setCurrentDomBet(this.domBet);
     },
-    setDomWinnigs() {
-      this.getCurrentDomWinnigs(this.domWinnigs);
+    setDomWinnings() {
+      this.setCurrentDomWinnings(this.domWinnings);
     },
   },
 };

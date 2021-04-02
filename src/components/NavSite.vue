@@ -34,7 +34,7 @@
           :disabled="getDisabled(item.status)"
           :ripple="false"
           color="primary"
-          @click="setSiteData"
+          @click="addSiteData"
         ></v-simple-checkbox>
       </template>
 
@@ -64,7 +64,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["getSiteData"]),
+    ...mapMutations(["setSiteData"]),
 
     getStatus(status) {
       switch (status) {
@@ -86,13 +86,12 @@ export default {
           return true;
       }
     },
-    setSiteData() {
+    addSiteData() {
       this.siteData = [];
       this.data.forEach((item) => {
         if (item.selected) this.siteData = this.siteData.concat(item.siteName);
       });
-
-      this.getSiteData(this.siteData);
+      this.setSiteData(this.siteData);
     },
   },
 };

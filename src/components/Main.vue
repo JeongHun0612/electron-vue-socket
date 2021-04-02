@@ -2,6 +2,10 @@
   <div>
     <TableLeague :data="tableListData" v-on:rowClick="getResultData" />
     <Result :data="resultData" />
+    <v-snackbar v-model="isSnackBar" :timeout="timeout" top>
+      <v-icon class="mr-2" color="red"> mdi-alert </v-icon>
+      사이트와 배팅금을 설정해주세요.
+    </v-snackbar>
   </div>
 </template>
 
@@ -9,6 +13,7 @@
 import TableLeague from "./TableLeague";
 import Result from "./Result";
 import data from "@/data";
+import { mapMutations, mapState } from "vuex";
 
 export default {
   components: { TableLeague, Result },
@@ -34,7 +39,12 @@ export default {
       resultData: ["", "", "", "", "", "", "", ""],
     };
   },
+  computed: {
+    ...mapState(["isSnackBar", "timeout"]),
+  },
   methods: {
+    ...mapMutations(["setIsSnackBar"]),
+
     getResultData(idx) {
       console.log("부모 : " + idx);
       this.resultData = this.tableListData[idx].data;

@@ -35,10 +35,15 @@ export default {
     };
   },
   computed: {
-    ...mapState(["siteData", "currentDomBet", "currentDomWinnings"]),
+    ...mapState([
+      "siteData",
+      "currentDomBet",
+      "currentDomWinnings",
+      "isSnackBar",
+    ]),
   },
   methods: {
-    ...mapMutations(["getDomBet", "getDomWinnigs"]),
+    ...mapMutations(["setDomBet", "setDomWinnings", "setIsSnackBar"]),
 
     startBtn() {
       if (
@@ -46,20 +51,22 @@ export default {
         this.currentDomBet != 0 &&
         this.currentDomWinnings != 0
       ) {
-        this.getDomBet(this.currentDomBet);
-        this.getDomWinnigs(this.currentDomWinnings);
+        this.setDomBet(this.currentDomBet);
+        this.setDomWinnings(this.currentDomWinnings);
 
         this.$socket.emit("assignSite", this.siteData);
         this.$socket.on("assignSite", (res) => {
           console.log("assignSite");
         });
       } else {
-        alert("사이트와 배팅금을 설정해주세요.");
+        if (!this.isSnackBar) {
+          this.setIsSnackBar(true);
+          setTimeout(() => this.setIsSnackBar(false), 3000);
+        }
       }
     },
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>

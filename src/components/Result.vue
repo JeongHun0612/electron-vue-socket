@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-card v-for="(item, index) in data" :key="index" width="165.7px">
+      <v-card v-for="(item, index) in data" :key="index" width="12.5%">
         <ResultList
           :style="getMaxResult(index)"
           :idx="index"

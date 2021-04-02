@@ -38,7 +38,7 @@
           <div class="grey lighten-2">배팅금</div>
         </v-col>
         <v-col sm="8">
-          <div style="text-align: right">{{ this.domBet }}</div>
+          <div style="text-align: right">{{ this.getDomBet }}</div>
         </v-col>
       </v-row>
       <v-row no-gutters dense>
@@ -94,7 +94,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   props: [
@@ -114,7 +114,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["domBet"]),
+    ...mapGetters(["getDomBet"]),
   },
 };
 </script>
