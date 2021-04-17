@@ -26,6 +26,7 @@ export default {
     // this.$socket.on("getSiteStatus", (res) => {
     //   this.siteListData = res;
     // });
+
     // data test 버전
     this.siteListData = data.siteListData;
   },
