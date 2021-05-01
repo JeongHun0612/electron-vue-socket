@@ -105,6 +105,7 @@ export default {
   },
   methods: {
     rowClick(idx) {
+      console.log(idx);
       this.$emit("rowClick", idx.id);
     },
     getSportIcon(sport) {

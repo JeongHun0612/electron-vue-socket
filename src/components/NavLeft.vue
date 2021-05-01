@@ -22,13 +22,13 @@ import { mapState, mapMutations } from "vuex";
 export default {
   components: { NavDate, NavSite, NavBet },
   created() {
-    // this.$socket.emit("getSiteStatus");
-    // this.$socket.on("getSiteStatus", (res) => {
-    //   this.siteListData = res;
-    // });
+    this.$socket.emit("getSiteStatus");
+    this.$socket.on("getSiteStatus", (res) => {
+      this.siteListData = res;
+    });
 
     // data test 버전
-    this.siteListData = data.siteListData;
+    // this.siteListData = data.siteListData;
   },
   data() {
     return {

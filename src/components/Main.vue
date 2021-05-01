@@ -18,20 +18,27 @@ import { mapMutations, mapState } from "vuex";
 export default {
   components: { TableLeague, Result },
   created() {
+    this.$socket.emit("getSiteInfo");
+    this.$socket.on("getSiteInfo", (res) => {
+      this.tableListData = res;
+      for (let i = 0; i < this.tableListData.length; i++) {
+        this.tableListData[i].id = i;
+      }
+    });
+
     this.$socket.emit("getResultData");
     this.$socket.on("getResultData", (res) => {
-      console.log(res);
-      // this.tableListData = [];
-      // res.forEach((item) => {
-      //   this.tableListData = this.tableListData.concat(item.data);
-      // });
+      this.tableListData = [];
+      res.forEach((item) => {
+        this.tableListData = this.tableListData.concat(item.data);
+      });
     });
 
     // data test 버전
-    this.tableListData = data.tableListData;
-    for (let i = 0; i < data.tableListData.length; i++) {
-      this.tableListData[i].id = i;
-    }
+    // this.tableListData = data.tableListData;
+    // for (let i = 0; i < data.tableListData.length; i++) {
+    //   this.tableListData[i].id = i;
+    // }
   },
   data() {
     return {
@@ -47,7 +54,7 @@ export default {
 
     getResultData(idx) {
       console.log("부모 : " + idx);
-      this.resultData = this.tableListData[idx].data;
+      // this.resultData = this.tableListData[idx];
     },
   },
 };
